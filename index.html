@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Shadow Blade: Ultra RPG</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Engine 2D WebGL PixiJS v7 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.3.2/pixi.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- Top HUD -->
+    <header id="top-hud">
+      <div class="res-group">
+        <div class="res-pill gold" title="Gold">🪙 <span id="ui-gold">0</span></div>
+        <div class="res-pill soul" title="Boss Souls">🔮 <span id="ui-souls">0</span></div>
+        <div class="res-pill emerald" title="Emeralds (Gacha)">❇️ <span id="ui-emeralds">0</span></div>
+        <div class="res-pill xp" title="Enchant XP">✨ <span id="ui-xp">0</span></div>
+      </div>
+      <div class="hud-actions">
+        <button id="btn-dungeon" class="hud-btn dungeon-btn">⚔️ DUNGEON</button>
+        <button id="btn-gacha" class="hud-btn gacha-btn">🎲 GACHA</button>
+        <button id="btn-shop" class="hud-btn shop-btn">🛒 ARMORY</button>
+        <button id="btn-audio" class="hud-btn icon-btn">🔊</button>
+      </div>
+    </header>
+
+    <!-- Stage & Biome Banner -->
+    <div id="stage-banner">
+      <div class="biome-tag" id="ui-biome">WHISPERING WOODS</div>
+      <div class="wave-info">STAGE <span id="ui-stage">1</span> • WAVE <span id="ui-wave">1/10</span></div>
+      <div class="dps-stats">
+        <span>TAP: <b id="ui-tap-dmg">10</b></span> | 
+        <span>DPS: <b id="ui-dps">0</b></span> | 
+        <span>CRIT: <b id="ui-crit">5%</b></span>
+      </div>
+    </div>
+
+    <!-- Floating Loot Toast Container -->
+    <div id="toast-container"></div>
+
+    <!-- Enemy Info Bar -->
+    <div id="enemy-hud">
+      <div class="enemy-header">
+        <span id="ui-enemy-badge" class="badge-normal">NORMAL</span>
+        <span id="ui-enemy-name">Forest Slime</span>
+        <span id="ui-enemy-trait" class="trait-tag"></span>
+      </div>
+      <div class="hp-bar-wrap">
+        <div id="ui-enemy-hp-fill" class="hp-fill"></div>
+        <div id="ui-enemy-armor-fill" class="armor-fill"></div>
+        <span id="ui-enemy-hp-text" class="hp-text">100 / 100</span>
+      </div>
+      <div id="boss-timer-wrap" class="hidden">
+        <div id="ui-boss-timer-fill" class="timer-fill"></div>
+        <span id="ui-boss-timer-text">25.0s</span>
+      </div>
+    </div>
+
+    <!-- PixiJS WebGL Canvas Arena -->
+    <main id="arena-container">
+      <div id="pixi-canvas"></div>
+      <div id="combo-display" class="hidden">
+        <span id="ui-combo-count">0</span>x COMBO
+      </div>
+    </main>
+
+    <!-- Active Skills Dock -->
+    <section id="skills-dock">
+      <!-- Diisi otomatis oleh game.js -->
+    </section>
+
+    <!-- Quick Upgrade Footer -->
+    <footer id="quick-bar">
+      <button id="q-upg-sword" class="quick-btn">
+        <div class="q-title">⚔️ Sharpen Blade</div>
+        <div class="q-sub">Lv.<span id="ui-sword-lv">1</span> (+Tap DMG)</div>
+        <div class="q-cost" id="ui-sword-cost">🪙 15</div>
+      </button>
+      <button id="q-upg-crit" class="quick-btn">
+        <div class="q-title">⚡ Fatal Strike</div>
+        <div class="q-sub">Lv.<span id="ui-crit-lv">1</span> (+Crit %/DMG)</div>
+        <div class="q-cost" id="ui-crit-cost">🪙 40</div>
+      </button>
+      <button id="q-enchant" class="quick-btn enchant-btn">
+        <div class="q-title">📘 Enchant Table</div>
+        <div class="q-sub" id="ui-active-enchant">No Enchant</div>
+        <div class="q-cost">✨ 10 XP</div>
+      </button>
+    </footer>
+
+    <!-- Modal Overlay (Armory Shop / Gacha / Dungeon) -->
+    <div id="modal-overlay" class="hidden">
+      <div id="modal-box">
+        <div class="modal-header">
+          <h2 id="modal-title">ROYAL ARMORY</h2>
+          <button id="modal-close" class="close-btn">✕</button>
+        </div>
+        <div id="modal-tabs" class="modal-tabs"></div>
+        <div id="modal-content" class="modal-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Urutan Script Wajib Seperti Ini -->
+  <script src="audio.js"></script>
+  <script src="data.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
